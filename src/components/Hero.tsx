@@ -1,4 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import profilePhoto from "@/assets/profile-photo.png";
 
 const Hero = () => {
   return (
@@ -51,8 +52,8 @@ const Hero = () => {
             <div className="relative group">
               {/* Glow ring behind avatar */}
               <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl group-hover:bg-primary/30 transition-all duration-500 scale-110" />
-              <Avatar className="w-48 h-48 md:w-64 md:h-64 border-2 border-primary/30 group-hover:border-primary/60 transition-all duration-300 relative">
-                <AvatarImage src="" alt="Andressa Silva" />
+              <Avatar className="w-48 h-48 md:w-64 md:h-64 border-2 border-primary/30 group-hover:border-primary/60 transition-all duration-300 relative shadow-lg">
+                <AvatarImage src={profilePhoto} alt="Andressa Silva" className="object-cover object-top" />
                 <AvatarFallback className="bg-card text-primary text-4xl md:text-5xl font-bold">
                   AS
                 </AvatarFallback>
