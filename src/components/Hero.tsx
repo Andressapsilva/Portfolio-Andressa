@@ -7,9 +7,10 @@ const Hero = () => {
             Desenvolvedor Full-Stack
           </p>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-6 animate-fade-in-up">
-            Criando experiências
+            Olá, eu sou
             <br />
-            <span className="text-primary text-glow">digitais únicas</span>
+            <span className="text-foreground">Andressa </span>
+            <span className="text-primary text-glow">Silva</span>
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
             Transformo ideias em código. Especializado em front-end moderno, 
