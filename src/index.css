@@ -80,6 +80,12 @@
       linear-gradient(to right, #1a1a1a 1px, transparent 1px),
       linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
     background-size: 40px 40px;
+    position: relative;
+  }
+
+  /* Smooth transitions for all interactive elements */
+  a, button, input, textarea, select {
+    @apply transition-all duration-300 ease-out;
   }
 }
 
@@ -94,6 +100,23 @@
 
   .border-glow {
     box-shadow: var(--glow-primary);
+  }
+
+  /* Microinteraction utilities */
+  .hover-lift {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300 ease-out hover:shadow-[0_0_20px_hsl(177_85%_46%/0.3)];
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 ease-out hover:scale-105 active:scale-95;
+  }
+
+  .interactive {
+    @apply transition-all duration-300 ease-out hover:scale-[1.02] hover:-translate-y-0.5;
   }
 }
 
