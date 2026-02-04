@@ -4,12 +4,14 @@ import Projects from "@/components/Projects";
 import Technologies from "@/components/Technologies";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import GeometricBackground from "@/components/GeometricBackground";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <GeometricBackground />
       <Header />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Projects />
         <Technologies />

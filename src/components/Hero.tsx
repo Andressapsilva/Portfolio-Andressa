@@ -34,13 +34,13 @@ const Hero = () => {
             <div className="flex gap-4 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: "0.4s" }}>
               <a
                 href="#projetos"
-                className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity"
+                className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:scale-105 hover:shadow-[0_0_20px_hsl(177_85%_46%/0.4)] active:scale-95 transition-all duration-300 ease-out"
               >
                 Ver Projetos
               </a>
               <a
                 href="#contato"
-                className="inline-flex items-center px-6 py-3 border border-border text-foreground font-medium rounded-lg hover:border-primary hover:text-primary transition-colors"
+                className="inline-flex items-center px-6 py-3 border border-border text-foreground font-medium rounded-lg hover:border-primary hover:text-primary hover:scale-105 hover:shadow-[0_0_15px_hsl(177_85%_46%/0.2)] active:scale-95 transition-all duration-300 ease-out"
               >
                 Contato
               </a>
@@ -49,11 +49,17 @@ const Hero = () => {
 
           {/* Avatar Photo */}
           <div className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <div className="relative group">
+            <div className="relative group cursor-pointer">
               {/* Glow ring behind avatar */}
-              <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl group-hover:bg-primary/30 transition-all duration-500 scale-110" />
-              <Avatar className="w-48 h-48 md:w-64 md:h-64 border-2 border-primary/30 group-hover:border-primary/60 transition-all duration-300 relative shadow-lg">
-                <AvatarImage src={profilePhoto} alt="Andressa Silva" className="object-cover object-top" />
+              <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl group-hover:bg-primary/40 group-hover:scale-125 transition-all duration-700 ease-out scale-110" />
+              {/* Outer decorative ring */}
+              <div className="absolute -inset-2 rounded-full border border-primary/10 group-hover:border-primary/30 group-hover:scale-105 transition-all duration-500 ease-out" />
+              <Avatar className="w-48 h-48 md:w-64 md:h-64 border-2 border-primary/30 group-hover:border-primary/60 transition-all duration-500 ease-out relative shadow-lg group-hover:shadow-[0_0_40px_hsl(177_85%_46%/0.3)] overflow-hidden">
+                <AvatarImage 
+                  src={profilePhoto} 
+                  alt="Andressa Silva" 
+                  className="object-cover scale-150 object-[center_15%] group-hover:scale-[1.55] transition-transform duration-700 ease-out contrast-[1.05] brightness-[1.02]" 
+                />
                 <AvatarFallback className="bg-card text-primary text-4xl md:text-5xl font-bold">
                   AS
                 </AvatarFallback>
