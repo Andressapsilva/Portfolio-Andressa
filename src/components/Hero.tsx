@@ -58,7 +58,7 @@ const Hero = () => {
                 <AvatarImage 
                   src={profilePhoto} 
                   alt="Andressa Silva" 
-                  className="object-cover scale-150 object-[center_15%] group-hover:scale-[1.55] transition-transform duration-700 ease-out contrast-[1.05] brightness-[1.02]" 
+                  className="object-cover scale-[1.8] object-[center_20%] group-hover:scale-[2] transition-transform duration-700 ease-out contrast-[1.05] brightness-[1.02]" 
                 />
                 <AvatarFallback className="bg-card text-primary text-4xl md:text-5xl font-bold">
                   AS
