@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Code2, Server, Zap } from "lucide-react";
+import { Code2, Server, Zap, ExternalLink, Github } from "lucide-react";
 
 type Category = "all" | "frontend" | "backend" | "automation";
 
@@ -12,10 +12,14 @@ interface Project {
   id: number;
   title: string;
   description: string;
+  problem: string;
+  techDetails: string;
   technologies: string[];
   category: Category;
   icon: React.ReactNode;
   subProjects?: SubProject[];
+  githubUrl?: string;
+  liveUrl?: string;
 }
 
 const projects: Project[] = [
@@ -23,22 +27,31 @@ const projects: Project[] = [
     id: 1,
     title: "Front-end",
     description: "Interfaces modernas e responsivas com foco em experiência do usuário, performance e design elegante.",
+    problem: "Criar experiências web rápidas, acessíveis e visualmente impactantes.",
+    techDetails: "Componentização avançada com React, tipagem estrita com TypeScript, estilização utilitária com Tailwind CSS e animações com Framer Motion.",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Framer Motion"],
     category: "frontend",
     icon: <Code2 className="w-6 h-6" />,
+    githubUrl: "#",
+    liveUrl: "#",
   },
   {
     id: 2,
     title: "Back-end",
     description: "APIs robustas, integração com bancos de dados e lógica de servidor escalável e segura.",
+    problem: "Construir APIs seguras e performáticas para aplicações em produção.",
+    techDetails: "Autenticação JWT, CRUD completo, integração com APIs externas e gerenciamento de banco de dados relacional.",
     technologies: ["Node.js", "Python", "PostgreSQL", "Supabase", "REST APIs"],
     category: "backend",
     icon: <Server className="w-6 h-6" />,
+    githubUrl: "#",
   },
   {
     id: 3,
     title: "Automação",
     description: "Fluxos automatizados para otimizar processos, integrar sistemas e aumentar produtividade.",
+    problem: "Eliminar tarefas repetitivas e conectar ferramentas de forma inteligente.",
+    techDetails: "Workflows visuais com n8n, automação empresarial com Power Automate, scripts customizados em Python e bots Discord com Discord.js.",
     technologies: ["n8n", "Power Automate", "Python", "Discord.js"],
     category: "automation",
     icon: <Zap className="w-6 h-6" />,
@@ -48,6 +61,7 @@ const projects: Project[] = [
       { name: "Python Scripts", description: "Automações customizadas e web scraping" },
       { name: "Discord Bots", description: "Bots de moderação, música e utilidades" },
     ],
+    githubUrl: "#",
   },
 ];
 
@@ -68,7 +82,6 @@ const Projects = () => {
 
   return (
     <section id="projetos" className="py-24 relative">
-      {/* Background glow effect */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/3 rounded-full blur-3xl" />
@@ -76,9 +89,7 @@ const Projects = () => {
 
       <div className="container mx-auto px-6 relative">
         <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Projetos
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Projetos</h2>
           <p className="text-muted-foreground max-w-xl">
             Uma seleção dos meus trabalhos organizados por área de especialização.
           </p>
@@ -106,13 +117,12 @@ const Projects = () => {
           {filteredProjects.map((project, index) => (
             <article
               key={project.id}
-              className="group relative p-6 rounded-2xl bg-card/30 backdrop-blur-md border border-border/30 hover:border-primary/40 hover:shadow-[0_0_30px_hsl(177_85%_46%/0.15)] transition-all duration-500 animate-fade-in"
+              className="group relative p-6 rounded-2xl bg-card/30 backdrop-blur-md border border-border/30 hover:border-primary/40 hover:shadow-[0_0_30px_hsl(177_85%_46%/0.15)] transition-all duration-500 animate-fade-in flex flex-col"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Glassmorphism overlay */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              <div className="relative">
+
+              <div className="relative flex-1 flex flex-col">
                 {/* Icon and Title */}
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors duration-300">
@@ -123,12 +133,15 @@ const Projects = () => {
                   </h3>
                 </div>
 
-                {/* Description */}
-                <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
-                  {project.description}
-                </p>
+                {/* Problem */}
+                <p className="text-xs text-primary/80 font-medium uppercase tracking-wide mb-2">Problema</p>
+                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{project.problem}</p>
 
-                {/* Sub-projects for Automation */}
+                {/* Tech details */}
+                <p className="text-xs text-primary/80 font-medium uppercase tracking-wide mb-2">Detalhes técnicos</p>
+                <p className="text-muted-foreground text-sm mb-5 leading-relaxed">{project.techDetails}</p>
+
+                {/* Sub-projects */}
                 {project.subProjects && (
                   <div className="grid grid-cols-2 gap-2 mb-5">
                     {project.subProjects.map((sub) => (
@@ -136,19 +149,15 @@ const Projects = () => {
                         key={sub.name}
                         className="p-3 rounded-lg bg-background/50 border border-border/20 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
                       >
-                        <span className="text-xs font-medium text-primary block mb-1">
-                          {sub.name}
-                        </span>
-                        <span className="text-xs text-muted-foreground leading-tight block">
-                          {sub.description}
-                        </span>
+                        <span className="text-xs font-medium text-primary block mb-1">{sub.name}</span>
+                        <span className="text-xs text-muted-foreground leading-tight block">{sub.description}</span>
                       </div>
                     ))}
                   </div>
                 )}
 
                 {/* Technologies */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-5">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
@@ -157,6 +166,32 @@ const Projects = () => {
                       {tech}
                     </span>
                   ))}
+                </div>
+
+                {/* Buttons */}
+                <div className="flex gap-3 mt-auto pt-2">
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary border border-border/40 hover:border-primary/40 px-3 py-2 rounded-lg transition-all duration-300"
+                    >
+                      <Github className="w-3.5 h-3.5" />
+                      GitHub
+                    </a>
+                  )}
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-primary-foreground bg-primary/90 hover:bg-primary px-3 py-2 rounded-lg transition-all duration-300"
+                    >
+                      <ExternalLink className="w-3.5 h-3.5" />
+                      Ver Projeto
+                    </a>
+                  )}
                 </div>
               </div>
             </article>
