@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Code2, Server, Zap, ExternalLink, Github } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 type Category = "all" | "frontend" | "backend" | "automation";
 
@@ -51,8 +52,8 @@ const projects: Project[] = [
     title: "Automação",
     description: "Fluxos automatizados para otimizar processos, integrar sistemas e aumentar produtividade.",
     problem: "Eliminar tarefas repetitivas e conectar ferramentas de forma inteligente.",
-    techDetails: "Workflows visuais com n8n, automação empresarial com Power Automate, scripts customizados em Python e bots Discord com Discord.js.",
-    technologies: ["n8n", "Power Automate", "Python", "Discord.js"],
+    techDetails: "Workflows visuais com n8n, automação empresarial com Power Automate, scripts customizados em Python, bots Discord com Discord.js e integração com IA Generativa para automações inteligentes na Borgno Transportes.",
+    technologies: ["n8n", "Power Automate", "Python", "Discord.js", "IA Generativa"],
     category: "automation",
     icon: <Zap className="w-6 h-6" />,
     subProjects: [
@@ -112,12 +113,19 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
           {filteredProjects.map((project, index) => (
             <article
               key={project.id}
-              className="group relative p-6 rounded-2xl bg-card/30 backdrop-blur-md border border-border/30 hover:border-primary/40 hover:shadow-[0_0_30px_hsl(177_85%_46%/0.15)] transition-all duration-500 animate-fade-in flex flex-col"
+              className="group relative p-6 rounded-2xl bg-card/30 backdrop-blur-md border border-border/30 hover:border-primary/40 hover:shadow-[0_0_30px_hsl(177_85%_46%/0.15)] transition-all duration-500 flex flex-col"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -196,7 +204,8 @@ const Projects = () => {
               </div>
             </article>
           ))}
-        </div>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );
