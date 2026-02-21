@@ -1,4 +1,4 @@
-import { FileText } from "lucide-react";
+import { FileText, Download } from "lucide-react";
 import heroPhoto from "@/assets/andressa-hero.jpeg";
 
 const Hero = () => {
@@ -25,9 +25,9 @@ const Hero = () => {
                 Andressa Silva
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            <p className="text-lg md:text-xl text-foreground/80 max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-in" style={{ animationDelay: "0.2s" }}>
               Desenvolvedora Full-Stack especializada em front-end moderno e automações 
-              inteligentes que transformam processos manuais em soluções eficientes.
+              inteligentes que <span className="text-primary/90 font-medium">transformam processos manuais em soluções eficientes</span>.
             </p>
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: "0.4s" }}>
               <a
@@ -38,6 +38,15 @@ const Hero = () => {
               >
                 <FileText className="w-4 h-4" />
                 Baixar Currículo
+              </a>
+              <a
+                href="https://drive.google.com/file/d/1ufOwxCzg7WDyk322aix3GCmy5LPnlUTI/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-primary/50 text-primary font-medium rounded-lg hover:bg-primary/10 hover:scale-105 hover:shadow-[0_0_15px_hsl(177_85%_46%/0.3)] active:scale-95 transition-all duration-300 ease-out"
+              >
+                <Download className="w-4 h-4" />
+                Baixar CV
               </a>
               <a
                 href="#projetos"
