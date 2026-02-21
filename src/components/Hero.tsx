@@ -1,4 +1,4 @@
-import { FileText, Download } from "lucide-react";
+import { Download } from "lucide-react";
 import heroPhoto from "@/assets/andressa-hero.jpeg";
 
 const Hero = () => {
@@ -31,13 +31,10 @@ const Hero = () => {
             </p>
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start animate-fade-in" style={{ animationDelay: "0.4s" }}>
               <a
-                href="/curriculo.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:scale-105 hover:shadow-[0_0_20px_hsl(177_85%_46%/0.4)] active:scale-95 transition-all duration-300 ease-out"
+                href="#projetos"
+                className="inline-flex items-center px-6 py-3 border border-border text-foreground font-medium rounded-lg hover:border-primary hover:text-primary hover:scale-105 hover:shadow-[0_0_15px_hsl(177_85%_46%/0.2)] active:scale-95 transition-all duration-300 ease-out"
               >
-                <FileText className="w-4 h-4" />
-                Baixar Currículo
+                Ver Projetos
               </a>
               <a
                 href="https://drive.google.com/file/d/1ufOwxCzg7WDyk322aix3GCmy5LPnlUTI/view?usp=sharing"
@@ -47,12 +44,6 @@ const Hero = () => {
               >
                 <Download className="w-4 h-4" />
                 Baixar CV
-              </a>
-              <a
-                href="#projetos"
-                className="inline-flex items-center px-6 py-3 border border-border text-foreground font-medium rounded-lg hover:border-primary hover:text-primary hover:scale-105 hover:shadow-[0_0_15px_hsl(177_85%_46%/0.2)] active:scale-95 transition-all duration-300 ease-out"
-              >
-                Ver Projetos
               </a>
               <a
                 href="#contato"

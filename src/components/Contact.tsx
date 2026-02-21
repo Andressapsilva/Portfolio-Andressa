@@ -43,12 +43,12 @@ const Contact = () => {
 
           {/* CV Button */}
           <a
-            href="/curriculo.pdf"
+            href="https://drive.google.com/file/d/1ufOwxCzg7WDyk322aix3GCmy5LPnlUTI/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:scale-105 hover:shadow-[0_0_20px_hsl(177_85%_46%/0.4)] active:scale-95 transition-all duration-300 ease-out mb-10"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary/10 text-primary font-semibold rounded-xl border border-primary/30 hover:bg-primary/20 hover:border-primary/60 hover:shadow-[0_0_25px_hsl(177_85%_46%/0.3)] hover:scale-105 active:scale-95 transition-all duration-300 ease-out mb-10"
           >
-            <FileText className="w-4 h-4" />
+            <FileText className="w-5 h-5" />
             Baixar Currículo
           </a>
 
