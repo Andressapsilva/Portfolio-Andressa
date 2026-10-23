@@ -6,61 +6,74 @@
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 95%;
+    --palette-primary: #7C3AED;
+    --palette-lavender: #A78BFA;
+    --palette-violet: #8B5CF6;
+    --palette-blue: #597FF2;
+    --palette-cyan: #24D5D0;
+    --palette-background: #09080F;
+    --palette-surface: #100D18;
+    --palette-card: #171024;
+    --palette-foreground: #F5F3FF;
+    --palette-muted-foreground: #A5A0B5;
 
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 95%;
+    --lavender: 255.1 91.7% 76.3%;
+    --background: 249 30.4% 4.5%;
+    --foreground: 252 100% 97.3%;
 
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 95%;
+    --card: 261 38.5% 10.2%;
+    --card-foreground: 252 100% 97.3%;
 
-    --primary: 177 85% 46%;
-    --primary-foreground: 0 0% 4%;
+    --popover: 256.4 28.6% 7.3%;
+    --popover-foreground: 252 100% 97.3%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 95%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 252 100% 97.3%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 55%;
+    --secondary: 256.4 28.6% 7.3%;
+    --secondary-foreground: 252 100% 97.3%;
 
-    --accent: 177 85% 46%;
-    --accent-foreground: 0 0% 4%;
+    --muted: 261 38.5% 10.2%;
+    --muted-foreground: 254.3 12.4% 66.9%;
+
+    --accent: 258.3 89.5% 66.3%;
+    --accent-foreground: 252 100% 97.3%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 177 85% 46%;
+    --border: 262 18% 20%;
+    --input: 262 18% 20%;
+    --ring: 255.1 91.7% 76.3%;
 
     --radius: 0.5rem;
 
-    /* Custom glow effect */
-    --glow-primary: 0 0 20px hsl(177 85% 46% / 0.5);
-    --glow-primary-strong: 0 0 30px hsl(177 85% 46% / 0.7);
+    --glow-primary: 0 0 16px color-mix(in srgb, var(--palette-primary) 16%, transparent);
+    --glow-primary-strong: 0 0 22px color-mix(in srgb, var(--palette-primary) 24%, transparent);
+    --glow-violet: 0 0 20px color-mix(in srgb, var(--palette-violet) 14%, transparent);
+    --glow-blue: 0 0 20px color-mix(in srgb, var(--palette-blue) 14%, transparent);
   }
 
   .dark {
-    --background: 0 0% 4%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 177 85% 46%;
-    --primary-foreground: 0 0% 4%;
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 55%;
-    --accent: 177 85% 46%;
-    --accent-foreground: 0 0% 4%;
+    --background: 249 30.4% 4.5%;
+    --foreground: 252 100% 97.3%;
+    --card: 261 38.5% 10.2%;
+    --card-foreground: 252 100% 97.3%;
+    --popover: 256.4 28.6% 7.3%;
+    --popover-foreground: 252 100% 97.3%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 252 100% 97.3%;
+    --secondary: 256.4 28.6% 7.3%;
+    --secondary-foreground: 252 100% 97.3%;
+    --muted: 261 38.5% 10.2%;
+    --muted-foreground: 254.3 12.4% 66.9%;
+    --accent: 258.3 89.5% 66.3%;
+    --accent-foreground: 252 100% 97.3%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 95%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 177 85% 46%;
+    --border: 262 18% 20%;
+    --input: 262 18% 20%;
+    --ring: 255.1 91.7% 76.3%;
   }
 }
 
@@ -73,12 +86,18 @@
     scroll-behavior: smooth;
   }
 
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background-image: 
-      linear-gradient(to right, #1a1a1a 1px, transparent 1px),
-      linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
+      linear-gradient(to right, color-mix(in srgb, var(--palette-violet) 4%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--palette-primary) 3%, transparent) 1px, transparent 1px);
     background-size: 40px 40px;
     position: relative;
   }
@@ -108,7 +127,7 @@
   }
 
   .hover-glow {
-    @apply transition-all duration-300 ease-out hover:shadow-[0_0_20px_hsl(177_85%_46%/0.3)];
+    @apply transition-all duration-300 ease-out hover:shadow-[var(--glow-primary)];
   }
 
   .hover-scale {
@@ -122,14 +141,13 @@
 
 /* Name shimmer effect */
 .name-shimmer {
-  position: relative;
-  background: linear-gradient(
-    90deg,
-    hsl(177 85% 46%) 0%,
-    hsl(177 85% 60%) 25%,
-    hsl(177 85% 75%) 50%,
-    hsl(177 85% 60%) 75%,
-    hsl(177 85% 46%) 100%
+position: relative;
+background: linear-gradient(
+  110deg,
+  var(--palette-lavender) 0%,
+  var(--palette-primary) 45%,
+  var(--palette-blue) 78%,
+  var(--palette-cyan) 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
@@ -140,8 +158,7 @@
 
 .name-shimmer:hover {
   animation: shimmer 2s ease-in-out infinite;
-  text-shadow: 0 0 30px hsl(177 85% 46% / 0.6), 0 0 60px hsl(177 85% 46% / 0.3);
-  filter: brightness(1.1);
+  filter: brightness(1.05) drop-shadow(0 0 10px color-mix(in srgb, var(--palette-violet) 18%, transparent));
 }
 
 @keyframes shimmer {

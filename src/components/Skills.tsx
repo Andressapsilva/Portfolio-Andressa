@@ -1,70 +1,56 @@
-import { Code2, Server, Zap } from "lucide-react";
+import { Database, Workflow, Code2 } from "lucide-react";
+import { ScrollReveal, StaggerGroup, StaggerItem } from "@/components/animations/ScrollReveal";
 
-interface SkillCategory {
-  title: string;
-  icon: React.ReactNode;
-  skills: string[];
-}
-
-const categories: SkillCategory[] = [
+const focusAreas = [
   {
-    title: "Front-end",
-    icon: <Code2 className="w-5 h-5" />,
-    skills: ["React", "TypeScript", "Tailwind CSS", "Next.js"],
+    title: "Aplicações web",
+    description: "Desenvolvimento de experiências web modernas e responsivas.",
+    icon: <Code2 className="h-4 w-4" aria-hidden="true" />,
   },
   {
-    title: "Back-end",
-    icon: <Server className="w-5 h-5" />,
-    skills: ["Node.js", "Python", "PostgreSQL", "REST APIs"],
+    title: "Sistemas e dados",
+    description: "Sistemas corporativos, bancos de dados e integrações.",
+    icon: <Database className="h-4 w-4" aria-hidden="true" />,
   },
   {
     title: "Automação",
-    icon: <Zap className="w-5 h-5" />,
-    skills: ["n8n", "Power Automate", "Web Scraping", "Bots com Discord.js"],
+    description: "Automação de processos e conexão entre ferramentas.",
+    icon: <Workflow className="h-4 w-4" aria-hidden="true" />,
   },
 ];
 
 const Skills = () => {
   return (
-    <section id="habilidades" className="py-24 relative">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
+    <section id="habilidades" className="relative py-20">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute right-0 top-0 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-6 relative">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Habilidades Técnicas</h2>
-        <p className="text-muted-foreground max-w-xl mb-12">
-          Tecnologias e ferramentas que domino para entregar soluções completas.
-        </p>
+      <div className="container relative mx-auto px-6">
+        <ScrollReveal effect="fadeIn" className="mb-8">
+          <h2 className="mb-3 text-3xl font-bold text-foreground md:text-4xl">Habilidades Técnicas</h2>
+          <p className="max-w-2xl text-muted-foreground">
+            Minha atuação combina desenvolvimento de aplicações, soluções para sistemas corporativos
+            e automação de processos.
+          </p>
+        </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {categories.map((cat) => (
-            <div
-              key={cat.title}
-              className="group p-6 rounded-2xl bg-card/30 backdrop-blur-md border border-border/30 hover:border-primary/40 hover:shadow-[0_0_25px_hsl(177_85%_46%/0.12)] transition-all duration-500"
+        <StaggerGroup className="grid gap-3 sm:grid-cols-3">
+          {focusAreas.map((area) => (
+            <StaggerItem
+              key={area.title}
+              className="group flex items-start gap-3 rounded-xl border border-border/50 bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_0_18px_hsl(var(--primary)/0.08)] motion-reduce:transform-none motion-reduce:transition-none"
             >
-              <div className="flex items-center gap-3 mb-5">
-                <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors duration-300">
-                  {cat.icon}
-                </div>
-                <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-                  {cat.title}
-                </h3>
+              <span className="mt-0.5 rounded-lg bg-primary/10 p-2 text-lavender [&>svg]:transition-transform [&>svg]:duration-200 group-hover:[&>svg]:scale-110 motion-reduce:[&>svg]:transition-none">
+                {area.icon}
+              </span>
+              <div>
+                <h3 className="text-sm font-semibold text-foreground">{area.title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{area.description}</p>
               </div>
-              <ul className="space-y-3">
-                {cat.skills.map((skill) => (
-                  <li
-                    key={skill}
-                    className="flex items-center gap-3 text-sm text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary/60 group-hover:bg-primary transition-colors duration-300" />
-                    {skill}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
       </div>
     </section>
   );

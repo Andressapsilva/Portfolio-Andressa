@@ -1,33 +1,110 @@
 import { FileText } from "lucide-react";
 
+type SocialBrand = "whatsapp" | "instagram" | "linkedin" | "github" | "gmail";
+
+const SocialIcon = ({ brand }: { brand: SocialBrand }) => {
+  if (brand === "whatsapp") {
+    return (
+      <svg viewBox="0 0 48 48" className="h-10 w-10" aria-hidden="true">
+        <path
+          fill="#25D366"
+          d="M24 3.5a20 20 0 0 0-17.1 30.4L4.5 44l10.4-2.7A20 20 0 1 0 24 3.5Z"
+        />
+        <path
+          fill="#fff"
+          d="M33.8 28.7c-.5-.3-3-1.5-3.5-1.7-.5-.2-.8-.3-1.2.3-.4.5-1.3 1.7-1.6 2.1-.3.4-.6.4-1.1.1-.5-.3-2.1-.8-4-2.5-1.5-1.3-2.5-3-2.8-3.5-.3-.5 0-.8.2-1 .3-.2.5-.6.8-.9.3-.3.4-.5.5-.8.2-.3.1-.6 0-.9-.1-.3-1.2-2.9-1.7-4-.4-1-.9-.9-1.2-.9h-1c-.4 0-.9.1-1.4.6-.5.5-1.8 1.8-1.8 4.3s1.9 5 2.1 5.3c.3.3 3.7 5.6 8.9 7.9 1.2.5 2.2.8 2.9 1.1 1.2.4 2.3.3 3.2.2 1-.2 3-1.2 3.4-2.4.4-1.2.4-2.2.3-2.4-.1-.2-.5-.3-1-.6Z"
+        />
+      </svg>
+    );
+  }
+
+  if (brand === "instagram") {
+    return (
+      <svg viewBox="0 0 48 48" className="h-10 w-10" aria-hidden="true">
+        <defs>
+          <linearGradient id="instagram-brand-gradient" x1="5" y1="43" x2="43" y2="5" gradientUnits="userSpaceOnUse">
+            <stop stopColor="#FFD600" />
+            <stop offset=".48" stopColor="#FF7A00" />
+            <stop offset=".73" stopColor="#FF0069" />
+            <stop offset="1" stopColor="#D300C5" />
+          </linearGradient>
+        </defs>
+        <rect x="4" y="4" width="40" height="40" rx="12" fill="url(#instagram-brand-gradient)" />
+        <rect x="12" y="12" width="24" height="24" rx="7" fill="none" stroke="#fff" strokeWidth="3" />
+        <circle cx="24" cy="24" r="5.5" fill="none" stroke="#fff" strokeWidth="3" />
+        <circle cx="32" cy="16.5" r="1.8" fill="#fff" />
+      </svg>
+    );
+  }
+
+  if (brand === "linkedin") {
+    return (
+      <svg viewBox="0 0 48 48" className="h-10 w-10" aria-hidden="true">
+        <rect x="3" y="3" width="42" height="42" rx="8" fill="#0A66C2" />
+        <path
+          fill="#fff"
+          d="M15.2 19.2h-5v16h5v-16Zm-2.5-2.2a2.9 2.9 0 1 0 0-5.8 2.9 2.9 0 0 0 0 5.8Zm21.1 9c0-4.8-2.6-7.1-6.1-7.1-2.8 0-4 1.5-4.7 2.5v-2.2h-5v16h5v-8.9c0-2.3.4-4.5 3.2-4.5s2.8 2.6 2.8 4.7v8.7h5v-9.2Z"
+        />
+      </svg>
+    );
+  }
+
+  if (brand === "github") {
+    return (
+      <svg viewBox="0 0 48 48" className="h-10 w-10" aria-hidden="true">
+        <path
+          fill="#F5F3FF"
+          d="M24 4a20 20 0 0 0-6.3 39c1 .2 1.4-.4 1.4-1v-3.8c-5.7 1.2-6.9-2.4-6.9-2.4-.9-2.3-2.3-2.9-2.3-2.9-1.9-1.3.1-1.3.1-1.3 2.1.1 3.2 2.1 3.2 2.1 1.9 3.2 4.9 2.3 6.1 1.8.2-1.4.7-2.3 1.3-2.8-4.6-.5-9.4-2.3-9.4-10.1 0-2.2.8-4 2.1-5.4-.2-.5-.9-2.6.2-5.4 0 0 1.7-.5 5.5 2.1a19.1 19.1 0 0 1 10 0c3.8-2.6 5.5-2.1 5.5-2.1 1.1 2.8.4 4.9.2 5.4 1.3 1.4 2.1 3.2 2.1 5.4 0 7.8-4.8 9.6-9.4 10.1.7.6 1.4 1.7 1.4 3.5V42c0 .6.4 1.2 1.4 1A20 20 0 0 0 24 4Z"
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 48 48" className="h-10 w-10" aria-hidden="true">
+      <path d="M5 13.5v21l7 5V18.4L5 13.5Z" fill="#4285F4" />
+      <path d="m12 18.4 12 9 12-9v-8.2L24 19.1 12 10.2v8.2Z" fill="#EA4335" />
+      <path d="M36 18.4v21l7-5v-21l-7 5Z" fill="#34A853" />
+      <path d="M5 13.5 12 19v-8.8L9.7 8.5A3 3 0 0 0 5 10.9v2.6Z" fill="#C5221F" />
+      <path d="M36 10.2V19l7-5.5v-2.6a3 3 0 0 0-4.7-2.4L36 10.2Z" fill="#FBBC04" />
+      <path d="M12 39.5v-21l-7-5v21l7 5Z" fill="#4285F4" />
+    </svg>
+  );
+};
+
 const Contact = () => {
   const socialLinks = [
     {
       label: "WhatsApp",
       href: "https://wa.me/5500000000000",
-      customIcon: "whatsapp",
+      brand: "whatsapp",
+      hoverGlow: "hover:shadow-[0_0_18px_rgba(37,211,102,0.18)]",
     },
     {
       label: "Instagram",
       href: "https://instagram.com/seuusuario",
-      icon: "https://skillicons.dev/icons?i=instagram&theme=dark",
+      brand: "instagram",
+      hoverGlow: "hover:shadow-[0_0_18px_rgba(255,0,105,0.18)]",
     },
     {
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/andressa-pedrosa-da-silva-168535289/",
-      icon: "https://skillicons.dev/icons?i=linkedin&theme=dark",
+      brand: "linkedin",
+      hoverGlow: "hover:shadow-[0_0_18px_rgba(10,102,194,0.2)]",
     },
     {
       label: "GitHub",
       href: "https://github.com/seuusuario",
-      icon: "https://skillicons.dev/icons?i=github&theme=dark",
+      brand: "github",
+      hoverGlow: "hover:shadow-[0_0_18px_rgba(245,243,255,0.14)]",
     },
     {
       label: "Gmail",
       href: "mailto:seu@gmail.com",
-      icon: "https://skillicons.dev/icons?i=gmail&theme=dark",
+      brand: "gmail",
+      hoverGlow: "hover:shadow-[0_0_18px_rgba(234,67,53,0.18)]",
     },
-  ];
+  ] satisfies { label: string; href: string; brand: SocialBrand; hoverGlow: string }[];
 
   return (
     <section id="contato" className="py-24 border-t border-border">
@@ -46,32 +123,29 @@ const Contact = () => {
             href="https://drive.google.com/file/d/1ufOwxCzg7WDyk322aix3GCmy5LPnlUTI/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary/10 text-primary font-semibold rounded-xl border border-primary/30 hover:bg-primary/20 hover:border-primary/60 hover:shadow-[0_0_25px_hsl(177_85%_46%/0.3)] hover:scale-105 active:scale-95 transition-all duration-300 ease-out mb-10"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-primary-foreground font-semibold rounded-xl border border-primary hover:bg-primary/90 hover:shadow-[0_0_25px_hsl(var(--primary)/0.16)] hover:scale-105 active:scale-95 transition-all duration-300 ease-out mb-10"
           >
             <FileText className="w-5 h-5" />
             Baixar Currículo
           </a>
 
-          <div className="flex justify-center items-center gap-6 flex-wrap">
+          <div className="flex justify-center items-start gap-4 flex-wrap sm:gap-6">
             {socialLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative p-3 rounded-xl bg-card/30 border border-border/30 hover:border-primary/50 hover:bg-primary/10 hover:shadow-[0_0_20px_hsl(177_85%_46%/0.3)] hover:scale-110 active:scale-95 transition-all duration-300"
+                className={`group flex min-w-[76px] flex-col items-center rounded-xl border border-border/40 bg-card px-3 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-border hover:scale-[1.03] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${link.hoverGlow}`}
                 aria-label={link.label}
+                title={link.label}
               >
-                {link.customIcon === "whatsapp" ? (
-                  <svg viewBox="0 0 256 256" className="w-10 h-10 relative z-10 grayscale group-hover:grayscale-0 transition-all duration-300" fill="none">
-                    <rect width="256" height="256" rx="60" fill="#1a1a1a" />
-                    <path d="M128 32C74.98 32 32 74.98 32 128c0 17.26 4.56 33.45 12.53 47.44L32 224l50.04-12.05A95.64 95.64 0 00128 224c53.02 0 96-42.98 96-96s-42.98-96-96-96zm0 176c-14.68 0-28.47-3.89-40.36-10.68l-2.89-1.72-29.97 7.86 8.01-29.26-1.89-3.01C53.25 157.56 48 143.24 48 128c0-44.11 35.89-80 80-80s80 35.89 80 80-35.89 80-80 80z" fill="#25D366" />
-                    <path d="M175.22 152.37c-2.62-1.31-15.49-7.64-17.89-8.51-2.4-.88-4.15-1.31-5.9 1.31-1.75 2.62-6.78 8.51-8.31 10.26-1.53 1.75-3.06 1.97-5.68.66-2.62-1.31-11.06-4.08-21.07-13.01-7.79-6.95-13.05-15.53-14.58-18.15-1.53-2.62-.16-4.04 1.15-5.34 1.18-1.17 2.62-3.06 3.93-4.59 1.31-1.53 1.75-2.62 2.62-4.37.88-1.75.44-3.28-.22-4.59-.66-1.31-5.9-14.22-8.09-19.47-2.13-5.11-4.29-4.42-5.9-4.5-1.53-.08-3.28-.1-5.03-.1s-4.59.66-6.99 3.28c-2.4 2.62-9.17 8.97-9.17 21.87s9.39 25.37 10.7 27.12c1.31 1.75 18.49 28.23 44.81 39.58 6.26 2.7 11.15 4.32 14.96 5.53 6.29 2 12.01 1.72 16.53 1.04 5.04-.76 15.49-6.33 17.67-12.45 2.18-6.11 2.18-11.35 1.53-12.45-.66-1.09-2.4-1.75-5.02-3.06z" fill="#25D366" />
-                  </svg>
-                ) : (
-                  <img src={link.icon} alt={link.label} className="w-10 h-10 relative z-10 grayscale group-hover:grayscale-0 transition-all duration-300" />
-                )}
-                <span className="block text-[10px] text-muted-foreground group-hover:text-primary text-center mt-1 transition-colors duration-300">{link.label}</span>
+                <span className="flex h-10 w-10 items-center justify-center transition-transform duration-300 group-hover:scale-105">
+                  <SocialIcon brand={link.brand} />
+                </span>
+                <span className="mt-2 text-center text-[10px] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
+                  {link.label}
+                </span>
               </a>
             ))}
           </div>

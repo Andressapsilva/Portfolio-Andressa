@@ -16,8 +16,8 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-sm border-b border-border">
       <div className="container mx-auto px-6 py-4">
         <nav className="flex items-center justify-between">
-          <a href="#" className="text-xl font-bold text-foreground hover:text-primary transition-colors">
-            Andressa <span className="text-primary">Silva</span>
+          <a href="#" className="text-xl font-bold text-foreground hover:text-lavender transition-colors">
+            Andressa <span className="text-lavender">Silva</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -26,7 +26,7 @@ const Header = () => {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                  className="text-sm font-medium text-muted-foreground hover:text-lavender transition-colors"
                 >
                   {link.label}
                 </a>
@@ -36,7 +36,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-foreground hover:text-primary transition-colors"
+            className="md:hidden text-foreground hover:text-lavender transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -51,7 +51,7 @@ const Header = () => {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                  className="text-sm font-medium text-muted-foreground hover:text-lavender transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}

@@ -1,81 +1,91 @@
+import { Code2, Database, Wrench, Workflow } from "lucide-react";
+import { ScrollReveal, StaggerGroup, StaggerItem } from "@/components/animations/ScrollReveal";
+
 const techGroups = [
   {
-    label: "Frontend",
-    items: [
-      { name: "React", icon: "https://skillicons.dev/icons?i=react" },
-      { name: "TypeScript", icon: "https://skillicons.dev/icons?i=ts" },
-      { name: "JavaScript", icon: "https://skillicons.dev/icons?i=js" },
-      { name: "HTML5", icon: "https://skillicons.dev/icons?i=html" },
-      { name: "CSS3", icon: "https://skillicons.dev/icons?i=css" },
-    ],
+    label: "Front-end",
+    icon: Code2,
+    iconClass: "text-lavender",
+    technologies: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Tailwind CSS", "Next.js", "Framer Motion"],
+    technologyIcon: Code2,
   },
   {
-    label: "Backend & Banco de Dados",
-    items: [
-      { name: "Node.js", icon: "https://skillicons.dev/icons?i=nodejs" },
-      { name: "Python", icon: "https://skillicons.dev/icons?i=python" },
-      { name: "PostgreSQL", icon: "https://skillicons.dev/icons?i=postgres" },
-      { name: "MySQL", icon: "https://skillicons.dev/icons?i=mysql" },
-      { name: "SQLite", icon: "https://skillicons.dev/icons?i=sqlite" },
-      { name: "Supabase", icon: "https://skillicons.dev/icons?i=supabase" },
-    ],
+    label: "Back-end e banco de dados",
+    icon: Database,
+    iconClass: "text-[var(--palette-cyan)]",
+    technologies: ["Node.js", "Python", "PostgreSQL", "MySQL", "SQLite", "Supabase", "REST APIs"],
+    technologyIcon: Database,
   },
   {
-    label: "Ferramentas",
-    items: [
-      { name: "GitHub", icon: "https://skillicons.dev/icons?i=github" },
-      { name: "Discord", icon: "https://skillicons.dev/icons?i=discord" },
-      { name: "Docker", icon: "https://skillicons.dev/icons?i=docker" },
-    ],
+    label: "Ferramentas e infraestrutura",
+    icon: Wrench,
+    iconClass: "text-lavender",
+    technologies: ["GitHub", "Docker", "Discord"],
+    technologyIcon: Wrench,
+  },
+  {
+    label: "Automações",
+    icon: Workflow,
+    iconClass: "text-[var(--palette-cyan)]",
+    technologies: ["n8n", "Power Automate", "Web Scraping", "Discord.js", "Integrações entre sistemas"],
+    technologyIcon: Workflow,
   },
 ];
 
 const Technologies = () => {
   return (
-    <section id="tecnologias" className="py-24 relative">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
+    <section id="tecnologias" className="relative py-20">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute bottom-0 left-1/4 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-6 relative">
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Linguagens & Tecnologias
+      <div className="container relative mx-auto px-6">
+        <ScrollReveal effect="fadeIn" className="mb-8">
+          <h2 className="mb-3 text-3xl font-bold text-foreground md:text-4xl">
+            Tecnologias e ferramentas
           </h2>
-          <p className="text-muted-foreground max-w-xl">
-            Ferramentas e tecnologias que utilizo para criar soluções eficientes e modernas.
+          <p className="max-w-2xl text-muted-foreground">
+            Tecnologias e ferramentas presentes na minha experiência e nos projetos apresentados.
           </p>
-        </div>
+        </ScrollReveal>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {techGroups.map((group) => (
-            <div key={group.label} className="space-y-4">
-              <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">
-                {group.label}
-              </h3>
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-4">
-                {group.items.map((tech, index) => (
-                  <div
-                    key={tech.name}
-                    className="group flex flex-col items-center gap-2 animate-fade-in"
-                    style={{ animationDelay: `${index * 0.05}s` }}
+        <StaggerGroup className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {techGroups.map((group, index) => {
+            const GroupIcon = group.icon;
+            const TechnologyIcon = group.technologyIcon;
+
+            return (
+              <StaggerItem key={group.label} className="h-full">
+              <section
+                aria-labelledby={`tech-group-${index}`}
+                className="group h-full rounded-2xl border border-border/50 bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-[0_0_20px_hsl(var(--primary)/0.08)] motion-reduce:transform-none motion-reduce:transition-none"
+              >
+                <ScrollReveal effect="fadeIn" className="mb-4">
+                  <h3
+                    id={`tech-group-${index}`}
+                    className={`flex items-center gap-2.5 text-sm font-semibold ${group.iconClass}`}
                   >
-                    <div className="relative p-3 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50 transition-all duration-300 group-hover:border-primary/50 group-hover:shadow-[0_0_20px_hsl(177_85%_46%/0.2)] group-hover:scale-110">
-                      <img
-                        src={tech.icon}
-                        alt={tech.name}
-                        className="w-10 h-10 md:w-12 md:h-12 transition-all duration-300 grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100"
-                      />
-                    </div>
-                    <span className="text-xs text-muted-foreground group-hover:text-primary transition-colors duration-300 text-center">
-                      {tech.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
+                    <GroupIcon className="h-4 w-4 transition-transform duration-200 group-hover:scale-110 motion-reduce:transition-none" aria-hidden="true" />
+                    {group.label}
+                  </h3>
+                </ScrollReveal>
+
+                <ul className="flex flex-wrap gap-2">
+                  {group.technologies.map((technology) => (
+                    <li
+                      key={technology}
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-border/60 bg-secondary px-2.5 py-2 text-xs text-muted-foreground transition-colors duration-200 hover:border-primary/50 hover:bg-primary/10 hover:text-lavender motion-reduce:transition-none"
+                    >
+                      <TechnologyIcon className="h-3.5 w-3.5 shrink-0 text-primary/80" aria-hidden="true" />
+                      {technology}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+              </StaggerItem>
+            );
+          })}
+        </StaggerGroup>
       </div>
     </section>
   );

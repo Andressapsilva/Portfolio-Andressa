@@ -1,212 +1,206 @@
-import { useState } from "react";
-import { Code2, Server, Zap, ExternalLink, Github } from "lucide-react";
-import { AnimatePresence, motion } from "framer-motion";
+import { lazy, Suspense, useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { BriefcaseBusiness, Code2, ExternalLink, Github, Image, MessageSquare } from "lucide-react";
+import { projectCategories, projects, type PortfolioProject, type ProjectCategory, type ProjectType } from "@/data/projects";
+import { ScrollReveal } from "@/components/animations/ScrollReveal";
+import { projectCardVariants } from "@/components/animations/variants";
 
-type Category = "all" | "frontend" | "backend" | "automation";
+const ProjectDetailsDialog = lazy(() => import("./ProjectDetailsDialog"));
 
-interface SubProject {
-  name: string;
-  description: string;
-}
+const categoryLabels: Record<ProjectCategory, string> = {
+  messaging: "Mensageria",
+  documents: "Documentos",
+  corporate: "Corporativo",
+};
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  problem: string;
-  techDetails: string;
-  technologies: string[];
-  category: Category;
-  icon: React.ReactNode;
-  subProjects?: SubProject[];
-  githubUrl?: string;
-  liveUrl?: string;
-}
+const projectTypeLabels: Record<ProjectType, string> = {
+  personal: "Pessoal",
+  academic: "Acadêmico",
+  professional: "Profissional",
+  unconfirmed: "Classificação a confirmar",
+};
 
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Front-end",
-    description: "Interfaces modernas e responsivas com foco em experiência do usuário, performance e design elegante.",
-    problem: "Criar experiências web rápidas, acessíveis e visualmente impactantes.",
-    techDetails: "Componentização avançada com React, tipagem estrita com TypeScript, estilização utilitária com Tailwind CSS e animações com Framer Motion.",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Framer Motion"],
-    category: "frontend",
-    icon: <Code2 className="w-6 h-6" />,
-    githubUrl: "#",
-    liveUrl: "#",
-  },
-  {
-    id: 2,
-    title: "Back-end",
-    description: "APIs robustas, integração com bancos de dados e lógica de servidor escalável e segura.",
-    problem: "Construir APIs seguras e performáticas para aplicações em produção.",
-    techDetails: "Autenticação JWT, CRUD completo, integração com APIs externas e gerenciamento de banco de dados relacional.",
-    technologies: ["Node.js", "Python", "PostgreSQL", "Supabase", "REST APIs"],
-    category: "backend",
-    icon: <Server className="w-6 h-6" />,
-    githubUrl: "#",
-  },
-  {
-    id: 3,
-    title: "Automação",
-    description: "Fluxos automatizados para otimizar processos, integrar sistemas e aumentar produtividade.",
-    problem: "Eliminar tarefas repetitivas e conectar ferramentas de forma inteligente.",
-    techDetails: "Workflows visuais com n8n, automação empresarial com Power Automate, scripts customizados em Python, bots Discord com Discord.js e integração com IA Generativa para automações inteligentes na Borgno Transportes.",
-    technologies: ["n8n", "Power Automate", "Python", "Discord.js", "IA Generativa"],
-    category: "automation",
-    icon: <Zap className="w-6 h-6" />,
-    subProjects: [
-      { name: "n8n Workflows", description: "Automações visuais e integrações entre plataformas" },
-      { name: "Power Automate", description: "Fluxos empresariais com Microsoft 365" },
-      { name: "Python Scripts", description: "Automações customizadas e web scraping" },
-      { name: "Discord Bots", description: "Bots de moderação, música e utilidades" },
-    ],
-    githubUrl: "#",
-  },
-];
+const categoryIcons = {
+  messaging: MessageSquare,
+  documents: Image,
+  corporate: BriefcaseBusiness,
+};
 
-const categories: { id: Category; label: string }[] = [
-  { id: "all", label: "Tudo" },
-  { id: "frontend", label: "Front-end" },
-  { id: "backend", label: "Back-end" },
-  { id: "automation", label: "Automação" },
-];
+const ProjectLink = ({ href, children }: { href: string; children: React.ReactNode }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-flex min-h-10 items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-lavender focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+  >
+    {children}
+  </a>
+);
 
 const Projects = () => {
-  const [activeCategory, setActiveCategory] = useState<Category>("all");
+  const [activeCategory, setActiveCategory] = useState<ProjectCategory | "all">("all");
+  const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
+  const prefersReducedMotion = useReducedMotion();
 
-  const filteredProjects =
-    activeCategory === "all"
-      ? projects
-      : projects.filter((project) => project.category === activeCategory);
+  const filteredProjects = useMemo(
+    () =>
+      activeCategory === "all"
+        ? projects
+        : projects.filter((project) => project.category === activeCategory),
+    [activeCategory],
+  );
 
   return (
-    <section id="projetos" className="py-24 relative">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/3 rounded-full blur-3xl" />
+    <section id="projetos" className="relative py-24">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute right-0 top-0 h-[30rem] w-[30rem] rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute bottom-0 left-0 h-80 w-80 rounded-full bg-[var(--palette-cyan)]/5 blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-6 relative">
-        <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Projetos</h2>
-          <p className="text-muted-foreground max-w-xl">
-            Uma seleção dos meus trabalhos organizados por área de especialização.
+      <div className="container relative mx-auto px-6">
+        <ScrollReveal effect="fadeIn" className="mb-10">
+          <p className="mb-3 text-sm font-medium uppercase tracking-[0.18em] text-lavender">Trabalhos selecionados</p>
+          <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">Projetos</h2>
+          <p className="max-w-2xl text-muted-foreground">
+            Projetos de desenvolvimento e ferramentas. Os detalhes são apresentados somente quando
+            há informações públicas confirmadas.
           </p>
+        </ScrollReveal>
+
+        <div className="mb-8 flex flex-wrap gap-2" role="group" aria-label="Filtrar projetos por categoria">
+          {projectCategories.map((category) => {
+            const isActive = activeCategory === category.id;
+
+            return (
+              <button
+                key={category.id}
+                type="button"
+                aria-pressed={isActive}
+                onClick={() => setActiveCategory(category.id)}
+                className={`min-h-10 rounded-lg border px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+                  isActive
+                    ? "border-primary/40 bg-primary/10 text-lavender"
+                    : "border-border/60 bg-card text-muted-foreground hover:border-primary/30 hover:text-foreground"
+                }`}
+              >
+                {category.label}
+              </button>
+            );
+          })}
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap gap-2 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`px-5 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 backdrop-blur-sm ${
-                activeCategory === category.id
-                  ? "text-primary bg-primary/10 border border-primary/30 shadow-[0_0_15px_hsl(177_85%_46%/0.2)]"
-                  : "text-muted-foreground bg-card/30 border border-border/30 hover:text-foreground hover:border-border"
-              }`}
-            >
-              {category.label}
-            </button>
-          ))}
-        </div>
+        <motion.div layout className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => {
+              const CategoryIcon = categoryIcons[project.category];
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-          {filteredProjects.map((project, index) => (
-            <article
-              key={project.id}
-              className="group relative p-6 rounded-2xl bg-card/30 backdrop-blur-md border border-border/30 hover:border-primary/40 hover:shadow-[0_0_30px_hsl(177_85%_46%/0.15)] transition-all duration-500 flex flex-col"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="relative flex-1 flex flex-col">
-                {/* Icon and Title */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors duration-300">
-                    {project.icon}
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                </div>
-
-                {/* Problem */}
-                <p className="text-xs text-primary/80 font-medium uppercase tracking-wide mb-2">Problema</p>
-                <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{project.problem}</p>
-
-                {/* Tech details */}
-                <p className="text-xs text-primary/80 font-medium uppercase tracking-wide mb-2">Detalhes técnicos</p>
-                <p className="text-muted-foreground text-sm mb-5 leading-relaxed">{project.techDetails}</p>
-
-                {/* Sub-projects */}
-                {project.subProjects && (
-                  <div className="grid grid-cols-2 gap-2 mb-5">
-                    {project.subProjects.map((sub) => (
-                      <div
-                        key={sub.name}
-                        className="p-3 rounded-lg bg-background/50 border border-border/20 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
-                      >
-                        <span className="text-xs font-medium text-primary block mb-1">{sub.name}</span>
-                        <span className="text-xs text-muted-foreground leading-tight block">{sub.description}</span>
+              return (
+                <motion.article
+                  key={project.id}
+                  layout
+                  custom={prefersReducedMotion ? 0 : index}
+                  initial={prefersReducedMotion ? false : "hidden"}
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.12 }}
+                  variants={projectCardVariants}
+                  exit={prefersReducedMotion ? undefined : "exit"}
+                  transition={prefersReducedMotion ? { duration: 0 } : undefined}
+                  whileHover={prefersReducedMotion ? undefined : { y: -4 }}
+                  className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-[border-color,box-shadow] duration-300 hover:border-primary/50 hover:shadow-[0_0_24px_hsl(var(--primary)/0.08)] motion-reduce:transform-none motion-reduce:transition-none"
+                >
+                  <div className="relative flex aspect-[16/9] items-center justify-center overflow-hidden border-b border-border/50 bg-secondary">
+                    {project.screenshot ? (
+                      <img
+                        src={project.screenshot}
+                        alt={project.screenshotAlt ?? `Captura de tela de ${project.name}`}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.025] motion-reduce:transition-none"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="flex flex-col items-center gap-3 text-muted-foreground" aria-label="Captura de tela não adicionada">
+                        <CategoryIcon className="h-8 w-8 text-lavender/70" aria-hidden="true" />
+                        <span className="text-xs">Captura de tela não adicionada</span>
                       </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs font-medium text-primary/80 px-2.5 py-1 bg-primary/5 border border-primary/20 rounded-lg group-hover:bg-primary/10 group-hover:border-primary/30 transition-all duration-300"
-                    >
-                      {tech}
+                    )}
+                    <span className="absolute left-3 top-3 rounded-md border border-border/60 bg-background/90 px-2.5 py-1 text-xs font-medium text-muted-foreground">
+                      {categoryLabels[project.category]}
                     </span>
-                  ))}
-                </div>
+                  </div>
 
-                {/* Buttons */}
-                <div className="flex gap-3 mt-auto pt-2">
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-primary border border-border/40 hover:border-primary/40 px-3 py-2 rounded-lg transition-all duration-300"
-                    >
-                      <Github className="w-3.5 h-3.5" />
-                      GitHub
-                    </a>
-                  )}
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-primary-foreground bg-primary/90 hover:bg-primary px-3 py-2 rounded-lg transition-all duration-300"
-                    >
-                      <ExternalLink className="w-3.5 h-3.5" />
-                      Ver Projeto
-                    </a>
-                  )}
-                </div>
-              </div>
-            </article>
-          ))}
-          </motion.div>
-        </AnimatePresence>
+                  <div className="flex flex-1 flex-col p-5">
+                    <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                      <h3 className="text-xl font-semibold text-foreground">{project.name}</h3>
+                      <span
+                        className={`rounded-full border px-2.5 py-1 text-[11px] font-medium ${
+                          project.type === "professional"
+                            ? "border-[var(--palette-cyan)]/25 bg-[var(--palette-cyan)]/10 text-[var(--palette-cyan)]"
+                            : "border-primary/20 bg-primary/5 text-lavender"
+                        }`}
+                      >
+                        {projectTypeLabels[project.type]}
+                      </span>
+                    </div>
+                    <p className="mb-5 text-sm leading-relaxed text-muted-foreground">{project.summary}</p>
+
+                    {project.technologies && project.technologies.length > 0 ? (
+                      <ul className="mb-5 flex flex-wrap gap-2" aria-label="Tecnologias">
+                        {project.technologies.map((technology) => (
+                          <li
+                            key={technology}
+                            className="rounded-md border border-border/60 bg-secondary px-2.5 py-1 text-xs text-muted-foreground"
+                          >
+                            {technology}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="mb-5 text-xs text-muted-foreground">
+                        Tecnologias não informadas publicamente.
+                      </p>
+                    )}
+
+                    <div className="mt-auto flex flex-wrap items-center gap-2 border-t border-border/50 pt-4">
+                      <motion.button
+                        type="button"
+                        onClick={() => setSelectedProject(project)}
+                        whileHover={prefersReducedMotion ? undefined : { y: -1 }}
+                        whileTap={prefersReducedMotion ? undefined : { scale: 0.98 }}
+                        className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                      >
+                        <Code2 className="h-4 w-4" aria-hidden="true" />
+                        Ver detalhes
+                      </motion.button>
+                      {project.githubUrl && (
+                        <ProjectLink href={project.githubUrl}>
+                          <Github className="h-4 w-4" aria-hidden="true" />
+                          GitHub
+                        </ProjectLink>
+                      )}
+                      {project.demoUrl && (
+                        <ProjectLink href={project.demoUrl}>
+                          <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                          Demonstração
+                        </ProjectLink>
+                      )}
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </AnimatePresence>
+        </motion.div>
       </div>
+
+      {selectedProject && (
+        <Suspense fallback={null}>
+          <ProjectDetailsDialog
+            project={selectedProject}
+            onOpenChange={(open) => {
+              if (!open) setSelectedProject(null);
+            }}
+          />
+        </Suspense>
+      )}
     </section>
   );
 };
