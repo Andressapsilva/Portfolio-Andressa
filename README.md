@@ -1,73 +1,149 @@
-# Welcome to your Lovable project
+# 💜 Portfólio | Andressa Silva
 
-## Project info
+<div align="center">
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Desenvolvedora Full-Stack | Estudante de Engenharia de Software**
 
-## How can I edit this code?
+Um espaço para apresentar minha trajetória profissional, habilidades técnicas e projetos desenvolvidos ao longo da minha jornada na tecnologia.
 
-There are several ways of editing your application.
+[🌐 Acessar Portfólio](https://andressapsilva.github.io/Portfolio-Andressa/) · [💻 Meu GitHub](https://github.com/andressapsilva)
 
-**Use Lovable**
+</div>
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 📖 Sobre o projeto
 
-**Use your preferred IDE**
+Este repositório contém o código-fonte do meu portfólio pessoal, desenvolvido para reunir minhas experiências, competências e projetos em um único lugar.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+A aplicação apresenta uma interface moderna, responsiva e interativa, com identidade visual baseada em tons de roxo e violeta, fundo escuro e animações suaves.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+O objetivo é proporcionar uma experiência agradável de navegação e facilitar o acesso às informações sobre minha atuação como desenvolvedora.
 
-Follow these steps:
+## ✨ Funcionalidades
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **Apresentação pessoal:** introdução sobre minha atuação e meus interesses profissionais.
+- **Sobre mim:** trajetória profissional e formação acadêmica.
+- **Habilidades técnicas:** principais áreas de conhecimento em desenvolvimento e tecnologia.
+- **Competências profissionais:** habilidades interpessoais e experiências de trabalho.
+- **Projetos:** apresentação de projetos acadêmicos, pessoais e profissionais, com filtros por categoria.
+- **Tecnologias e ferramentas:** ferramentas utilizadas ao longo da minha jornada.
+- **Contato:** acesso às minhas redes profissionais e ao currículo.
+- **Design responsivo:** interface adaptada para diferentes tamanhos de tela.
+- **Animações e interatividade:** transições e efeitos visuais para melhorar a experiência de navegação.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🛠️ Tecnologias utilizadas
 
-# Step 3: Install the necessary dependencies.
-npm i
+O portfólio foi desenvolvido utilizando:
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+| Tecnologia | Utilização |
+|---|---|
+| React | Construção da interface |
+| TypeScript | Desenvolvimento com tipagem estática |
+| Vite | Ambiente de desenvolvimento e build |
+| Tailwind CSS | Estilização e responsividade |
+| HTML5 | Estrutura semântica |
+| CSS3 | Estilos e efeitos visuais |
+| Git e GitHub | Versionamento de código |
+| GitHub Pages | Hospedagem |
+| GitHub Actions | Deploy automático |
+
+O projeto foi inicialmente estruturado com auxílio do Lovable e posteriormente personalizado e desenvolvido no Visual Studio Code.
+
+## 📂 Estrutura do projeto
+
+```text
+Portfolio-Andressa/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── App.tsx
+│   └── main.tsx
+├── index.html
+├── package.json
+├── vite.config.ts
+└── README.md
+```
+
+## 🚀 Executando localmente
+
+Para executar o projeto no seu computador, siga as instruções abaixo.
+
+### Pré-requisitos
+
+- Node.js
+- npm
+- Git
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/Andressapsilva/Portfolio-Andressa.git
+```
+
+### 2. Acesse a pasta
+
+```bash
+cd Portfolio-Andressa
+```
+
+### 3. Instale as dependências
+
+```bash
+npm install
+```
+
+### 4. Inicie o servidor de desenvolvimento
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Acesse o endereço informado pelo Vite no terminal.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### 5. Gere a versão de produção
 
-**Use GitHub Codespaces**
+```bash
+npm run build
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Os arquivos compilados serão gerados na pasta `dist`.
 
-## What technologies are used for this project?
+## 🌐 Deploy
 
-This project is built with:
+O portfólio está hospedado no **GitHub Pages** e utiliza **GitHub Actions** para automatizar a publicação.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Sempre que uma alteração é enviada para a branch `main`, o workflow executa o build e publica a versão atualizada da aplicação.
 
-## How can I deploy this project?
+**Acesse a versão publicada:**
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+https://andressapsilva.github.io/Portfolio-Andressa/
 
-## Can I connect a custom domain to my Lovable project?
+## 👩‍💻 Sobre mim
 
-Yes, you can!
+Sou estudante do 6º período de Engenharia de Software e desenvolvedora Full-Stack, com experiência em desenvolvimento de aplicações web, sistemas corporativos, bancos de dados, integrações e automação de processos.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+Minha trajetória profissional inclui experiências como Jovem Aprendiz na área de TI, Estagiária de Desenvolvimento e Auxiliar de TI Júnior.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Busco continuar aprimorando minhas habilidades técnicas, desenvolver soluções úteis e ampliar minha experiência em projetos de software.
+
+## 📬 Contato
+
+Quer conhecer melhor meu trabalho ou conversar sobre oportunidades?
+
+- **Portfólio:** [andressapsilva.github.io/Portfolio-Andressa](https://andressapsilva.github.io/Portfolio-Andressa/)
+- **GitHub:** [github.com/andressapsilva](https://github.com/andressapsilva)
+
+Outros canais de contato estão disponíveis no próprio portfólio.
+
+---
+
+<div align="center">
+
+Desenvolvido com 💜 por **Andressa Silva**
+
+</div>
